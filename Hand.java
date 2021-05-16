@@ -37,6 +37,46 @@ public class Hand implements HandInterface {
    public Card [] findSet( ){
 	    return null;
    }
+	
+   /**
+   * Overwrite of findSet method
+   * Searches for the first instance of a set (3 or 4 Cards of the same rank) in the hand.
+   * It checks for 3 or 4 cards of the same rank in a row
+   * @return indexes of Cards found in deck.
+   */
+   public int[] findSet(){
+	   sort();
+	   int count = 1;
+	   char cardsRank = 'x';
+	   int [] indexes = new int[4];
+	   
+	   indexes[0] = -1;
+	   
+	   for(Card card: hand)
+	   {
+		   // If a rank is the same as the previous card, increment count by 1
+		   if(card.getRank() == cardRank)
+		   {
+			   count++;
+			   indexes[count-1] = hand.indexOf(card);
+		   }
+		   // Reset count to 1 if the cards in a row stop before reaching 3
+		   else if(count < 3)
+		   {
+			   indexes[0] = hand.indexOf(card);
+			   count = 1;
+			   cardRank = card.getRank();
+		   }
+		   // Return the indexes of the cards if at least 3 cards of the same rank are in a row
+		   else
+		   {
+			   return indexes;
+		   }
+	   }
+	   
+	   // Returns -1 in first spot if a set wasn't found
+	   return indexes;
+   }
 
   /**
    * Obtains the card stored at the specified location in the hand.  Does not
