@@ -1,4 +1,3 @@
-# proj2
-# Rummy Game in Java
+# proj2: Rummy Game in Java
 
-Rumy game implemented in Java
+Rummy game implemented in Java
